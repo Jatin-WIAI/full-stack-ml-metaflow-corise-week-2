@@ -55,9 +55,9 @@ class NbowModel():
         return roc_auc_score(labels,  self.predict(X))
     
     def score(self,df):
-        cols_without_label = [x for x in df.columns if x!="label"]
-        df_without_label = df[cols_without_label]
-        return self.eval_acc(df_without_label,list(df["label"])), self.eval_rocauc(df_without_label,list(df["label"]))
+        df = df.reset_index()
+        # print(df)
+        return self.eval_acc(df["review"],df["label"]),self.eval_rocauc(df["review"],df["label"])
 
     @property
     def model_dict(self): 
