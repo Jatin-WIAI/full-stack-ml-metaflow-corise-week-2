@@ -36,8 +36,8 @@ class BaselineChallenge(FlowSpec):
         
         # load dataset packaged with the flow.
         # this technique is convenient when working with small datasets that need to move to remove tasks.
-        print(self.data)
-        df = pd.read_csv(self.data)
+        # print(self.data)
+        df = pd.read_csv("/home/workspace/workspaces/full-stack-ml-metaflow-corise-week-1/data/Womens Clothing E-Commerce Reviews.csv")
         # TODO: load the data. 
         # Look up a few lines to the IncludeFile('data', default='Womens Clothing E-Commerce Reviews.csv'). 
         # You can find documentation on IncludeFile here: https://docs.metaflow.org/scaling/data#data-in-local-files
@@ -71,8 +71,8 @@ class BaselineChallenge(FlowSpec):
         # self.model = MjorityClassModel()
         # self.model.fit(self.traindf)
         predictions = [1]*len(self.valdf)
-        acc = accuracy_score(self.valdf["label"],self.valdf["output"])
-        rocauc = roc_auc_score(self.valdf["label"],self.valdf["output"])
+        acc = accuracy_score(self.valdf["label"],predictions)
+        rocauc = roc_auc_score(self.valdf["label"],predictions)
 
         self.result = ModelResult("Baseline", params, pathspec, acc, rocauc)
         self.next(self.aggregate)
